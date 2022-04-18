@@ -1,6 +1,5 @@
 package com.andre.helpdesk.domain;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +23,8 @@ public class Cliente extends Pessoa{
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Cliente(Integer id, String nome, String cpf, String email, String senha, LocalDate dataCriacao) {
-		super(id, nome, cpf, email, senha, dataCriacao);
+	public Cliente(Long id, String nome, String cpf, String email, String senha) {
+		super(id, nome, cpf, email, senha);
 		addPerfil(Perfil.CLIENTE);
 	}
 

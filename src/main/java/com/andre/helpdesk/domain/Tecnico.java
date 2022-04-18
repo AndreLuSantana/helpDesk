@@ -1,6 +1,5 @@
 package com.andre.helpdesk.domain;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ import javax.persistence.Table;
 import com.andre.helpdesk.domain.enums.Perfil;
 
 @Entity
-@Table(name = "tb_pessoa")
+@Table(name = "tb_tecnico")
 public class Tecnico extends Pessoa{
 
 	private static final long serialVersionUID = 1L;
@@ -24,8 +23,8 @@ public class Tecnico extends Pessoa{
 		addPerfil(Perfil.TECNICO);
 	}
 
-	public Tecnico(Integer id, String nome, String cpf, String email, String senha, LocalDate dataCriacao) {
-		super(id, nome, cpf, email, senha, dataCriacao);
+	public Tecnico(Long id, String nome, String cpf, String email, String senha) {
+		super(id, nome, cpf, email, senha);
 		
 		addPerfil(Perfil.TECNICO);
 	}

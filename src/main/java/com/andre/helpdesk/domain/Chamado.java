@@ -23,7 +23,7 @@ public class Chamado implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataAbertura;
@@ -46,7 +46,7 @@ public class Chamado implements Serializable{
 		
 	}
 	
-	public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Cliente cliente,
+	public Chamado(Long id, Prioridade prioridade, Status status, String titulo, String observacoes, Cliente cliente,
 			Tecnico tecnico) {
 		super();
 		this.id = id;
@@ -57,10 +57,10 @@ public class Chamado implements Serializable{
 		this.cliente = cliente;
 		this.tecnico = tecnico;
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public LocalDate getDataAbertura() {
