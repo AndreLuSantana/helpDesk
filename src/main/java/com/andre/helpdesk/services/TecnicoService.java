@@ -15,7 +15,6 @@ public class TecnicoService {
 	@Autowired
 	TecnicoRepository tecnicoRepository;
 	
-	@GetMapping(value = "/{id}")
 	public Tecnico findById(Long id) {
 		
 		Optional<Tecnico> obj = tecnicoRepository.findById(id);
