@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.andre.helpdesk.domain.Tecnico;
 import com.andre.helpdesk.repositories.TecnicoRepository;
@@ -14,6 +15,7 @@ public class TecnicoService {
 	@Autowired
 	TecnicoRepository tecnicoRepository;
 	
+	@GetMapping(value = "/{id}")
 	public Tecnico findById(Long id) {
 		
 		Optional<Tecnico> obj = tecnicoRepository.findById(id);
