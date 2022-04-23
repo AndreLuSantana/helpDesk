@@ -12,12 +12,18 @@ import com.andre.helpdesk.domain.Tecnico;
 import com.andre.helpdesk.domain.dtos.TecnicoDTO;
 import com.andre.helpdesk.repositories.TecnicoRepository;
 import com.andre.helpdesk.services.exceptions.ObjectNotFoundException;
+import com.andre.helpdesk.services.validation.ValidaCPF;
+import com.andre.helpdesk.services.validation.ValidaEmail;
 
 @Service
 public class TecnicoService {
 	
 	@Autowired
-	TecnicoRepository tecnicoRepository;
+	private TecnicoRepository tecnicoRepository;
+	@Autowired
+	private ValidaCPF validaCPF;
+	@Autowired
+	private ValidaEmail validaEmail;
 	
 	public Set<TecnicoDTO> findAll() {
 		List<Tecnico> tecnicos = tecnicoRepository.findAll();
@@ -32,7 +38,10 @@ public class TecnicoService {
 
 	public TecnicoDTO create(Tecnico obj) {
 		obj.setId(null);
+		validaCPF.validaCPF(obj);
+		validaEmail.validaEmail(obj);
 		Tecnico tecnico = tecnicoRepository.save(obj);
+		
 		return new TecnicoDTO(tecnico);
 	}
 	
