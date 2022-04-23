@@ -10,17 +10,17 @@ import com.andre.helpdesk.domain.Tecnico;
 import com.andre.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class TecnicoDTO implements Serializable{
-	
+public class TecnicoDTO implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	protected Long id;
 	protected String nome;
 	protected String cpf;
 	protected String email;
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
-	
+
 	@JsonFormat(pattern = "dd/MM/yyy")
 	protected LocalDate dataCriacao = LocalDate.now();
 
@@ -34,7 +34,7 @@ public class TecnicoDTO implements Serializable{
 		this.cpf = tecnico.getCpf();
 		this.email = tecnico.getEmail();
 		this.senha = tecnico.getSenha();
-		this.perfis = tecnico.getPerfil().stream().map(x ->x.getCódigo()).collect(Collectors.toSet());
+		this.perfis = tecnico.getPerfil().stream().map(x -> x.getCódigo()).collect(Collectors.toSet());
 		this.dataCriacao = tecnico.getDataCriacao();
 	}
 
