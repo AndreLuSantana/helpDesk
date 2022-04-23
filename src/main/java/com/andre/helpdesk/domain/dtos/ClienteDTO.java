@@ -6,36 +6,36 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.andre.helpdesk.domain.Tecnico;
+import com.andre.helpdesk.domain.Cliente;
 import com.andre.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class ClienteDTO implements Serializable{
+public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	protected Long id;
 	protected String nome;
 	protected String cpf;
 	protected String email;
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
-	
+
 	@JsonFormat(pattern = "dd/MM/yyy")
 	protected LocalDate dataCriacao = LocalDate.now();
 
 	public ClienteDTO() {
 	}
 
-	public ClienteDTO(Tecnico tecnico) {
+	public ClienteDTO(Cliente cliente) {
 		super();
-		this.id = tecnico.getId();
-		this.nome = tecnico.getNome();
-		this.cpf = tecnico.getCpf();
-		this.email = tecnico.getEmail();
-		this.senha = tecnico.getSenha();
-		this.perfis = tecnico.getPerfil().stream().map(x ->x.getCódigo()).collect(Collectors.toSet());
-		this.dataCriacao = tecnico.getDataCriacao();
+		this.id = cliente.getId();
+		this.nome = cliente.getNome();
+		this.cpf = cliente.getCpf();
+		this.email = cliente.getEmail();
+		this.senha = cliente.getSenha();
+		this.perfis = cliente.getPerfil().stream().map(x -> x.getCódigo()).collect(Collectors.toSet());
+		this.dataCriacao = cliente.getDataCriacao();
 	}
 
 	public Long getId() {
