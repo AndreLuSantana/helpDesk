@@ -1,5 +1,7 @@
 package com.andre.helpdesk.controllers;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +20,17 @@ public class TecnicoController {
 	@Autowired
 	TecnicoService tecnicoService;
 	
+	
+	@GetMapping
+	public ResponseEntity<Set<TecnicoDTO>> findAll(){
+		Set<TecnicoDTO> tecnicos = tecnicoService.findAll();
+		return ResponseEntity.ok().body(tecnicos);
+	}
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> findById(@PathVariable Long id){
 		Tecnico obj = tecnicoService.findById(id);
 		return ResponseEntity.ok().body(new TecnicoDTO(obj));
 	}
+	
 }
