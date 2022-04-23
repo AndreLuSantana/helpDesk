@@ -6,5 +6,4 @@ import com.andre.helpdesk.domain.Tecnico;
 
 public interface TecnicoRepository extends JpaRepository<Tecnico, Long>{
 	
-
 }
