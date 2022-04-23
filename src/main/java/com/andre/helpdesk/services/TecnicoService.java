@@ -30,4 +30,10 @@ public class TecnicoService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado. ID = " + id));
 	}
 
+	public TecnicoDTO create(Tecnico obj) {
+		obj.setId(null);
+		Tecnico tecnico = tecnicoRepository.save(obj);
+		return new TecnicoDTO(tecnico);
+	}
+	
 }
