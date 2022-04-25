@@ -3,6 +3,8 @@ package com.andre.helpdesk.controllers;
 import java.net.URI;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +40,7 @@ public class TecnicoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> create(@RequestBody Tecnico tecnico){
+	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody Tecnico tecnico){
 		TecnicoDTO tecnicoDTO = tecnicoService.create(tecnico);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(tecnicoDTO.getId()).toUri();
 		return ResponseEntity.created(uri).build();

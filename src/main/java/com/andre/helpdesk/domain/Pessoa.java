@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.andre.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,12 +29,15 @@ public abstract class Pessoa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+	@NotNull(message = "O campo NOME é obrigatório.")
 	protected String nome;
-	
 	@Column(unique = true)
+	@NotNull(message = "O campo CPF é obrigatório.")
 	protected String cpf;
 	@Column(unique = true)
+	@NotNull(message = "O campo EMAIL é obrigatório.")
 	protected String email;
+	@NotNull(message = "O campo SENHA é obrigatório.")
 	protected String senha;
 	
 	@ElementCollection(fetch = FetchType.EAGER)
