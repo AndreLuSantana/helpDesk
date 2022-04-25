@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,22 @@ public class TecnicoService {
 		Tecnico tecnico = tecnicoRepository.save(obj);
 		
 		return new TecnicoDTO(tecnico);
+	}
+
+	public Tecnico update(Long id, @Valid TecnicoDTO objDTO) {
+		Tecnico tecnico = findById(id);
+		validaCPF.validaCPF(tecnico);
+		validaEmail.validaEmail(tecnico);
+		updateData(tecnico, objDTO);
+		tecnicoRepository.save(tecnico);
+		return tecnico;
+	}
+
+	private void updateData(Tecnico tecnico, @Valid TecnicoDTO objDTO) {
+		tecnico.setNome(objDTO.getNome());
+		tecnico.setCpf(objDTO.getCpf());
+		tecnico.setEmail(objDTO.getEmail());
+		tecnico.setSenha(objDTO.getSenha());
 	}
 	
 }	
