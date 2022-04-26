@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.andre.helpdesk.domain.Tecnico;
 import com.andre.helpdesk.domain.dtos.TecnicoDTO;
 import com.andre.helpdesk.repositories.TecnicoRepository;
+import com.andre.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.andre.helpdesk.services.exceptions.ObjectNotFoundException;
 import com.andre.helpdesk.services.validation.ValidaCPF;
 import com.andre.helpdesk.services.validation.ValidaEmail;
@@ -61,6 +62,14 @@ public class TecnicoService {
 		tecnico.setCpf(objDTO.getCpf());
 		tecnico.setEmail(objDTO.getEmail());
 		tecnico.setSenha(objDTO.getSenha());
+	}
+	
+	public void delete(TecnicoDTO tecnicoDTO) {
+		Tecnico tecnico = findById(tecnicoDTO.getId());
+		if(tecnico.getChamados().size() > 0){
+			throw new DataIntegrityViolationException("Técnico com chamados em aberto. Não é possível excluí-lo.");
+		}
+		tecnicoRepository.delete(tecnico);
 	}
 	
 }	
