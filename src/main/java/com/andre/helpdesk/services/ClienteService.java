@@ -1,0 +1,33 @@
+package com.andre.helpdesk.services;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.andre.helpdesk.domain.Cliente;
+import com.andre.helpdesk.domain.dtos.ClienteDTO;
+import com.andre.helpdesk.repositories.ClienteRepository;
+import com.andre.helpdesk.services.validation.ValidaCPF;
+import com.andre.helpdesk.services.validation.ValidaEmail;
+
+@Service
+public class ClienteService {
+
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private ValidaCPF validaCPF;
+	@Autowired
+	private ValidaEmail validaEmail;
+	
+	public Set<ClienteDTO> findAll() {
+		List<Cliente> clientes = clienteRepository.findAll();
+		return clientes.stream().map(x -> new ClienteDTO(x)).collect(Collectors.toSet());
+	}
+	
+	
+	
+}
