@@ -64,8 +64,8 @@ public class TecnicoService {
 		tecnico.setSenha(objDTO.getSenha());
 	}
 	
-	public void delete(TecnicoDTO tecnicoDTO) {
-		Tecnico tecnico = findById(tecnicoDTO.getId());
+	public void delete(Long id) {
+		Tecnico tecnico = findById(id);
 		if(tecnico.getChamados().size() > 0){
 			throw new DataIntegrityViolationException("Técnico com chamados em aberto. Não é possível excluí-lo.");
 		}
