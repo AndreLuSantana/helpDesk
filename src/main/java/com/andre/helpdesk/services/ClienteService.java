@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.andre.helpdesk.domain.Cliente;
 import com.andre.helpdesk.domain.dtos.ClienteDTO;
 import com.andre.helpdesk.repositories.ClienteRepository;
+import com.andre.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.andre.helpdesk.services.exceptions.ObjectNotFoundException;
 import com.andre.helpdesk.services.validation.ValidaCPF;
 import com.andre.helpdesk.services.validation.ValidaEmail;
@@ -61,6 +62,15 @@ public class ClienteService {
 		cliente.setCpf(clienteDto.getCpf());
 		cliente.setEmail(clienteDto.getEmail());
 		cliente.setSenha(cliente.getSenha());
+	}
+
+	public void delete(Long id) {
+		Cliente cliente = findById(id);
+		if(cliente.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("Cliente com chamado em aberto. Não é possível excluí-lo.");
+		}
+		
+		clienteRepository.delete(cliente); 
 	}
 	
 	
