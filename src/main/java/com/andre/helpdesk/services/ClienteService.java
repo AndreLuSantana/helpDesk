@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,22 @@ public class ClienteService {
 		validaEmail.validaEmail(obj);
 		Cliente cliente = clienteRepository.save(obj);
 		return new ClienteDTO(cliente);
+	}
+
+	public Cliente update(Long id, @Valid ClienteDTO clienteDto) {
+		Cliente cliente = findById(id);
+		validaCPF.validaCPF(cliente);
+		validaEmail.validaEmail(cliente);
+		updateData(cliente, clienteDto);
+		clienteRepository.save(cliente);
+		return cliente;
+	}
+
+	private void updateData(Cliente cliente, @Valid ClienteDTO clienteDto) {
+		cliente.setNome(clienteDto.getNome());
+		cliente.setCpf(clienteDto.getCpf());
+		cliente.setEmail(clienteDto.getEmail());
+		cliente.setSenha(cliente.getSenha());
 	}
 	
 	
