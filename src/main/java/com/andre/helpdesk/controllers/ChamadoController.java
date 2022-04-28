@@ -7,9 +7,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,4 +46,16 @@ public class ChamadoController {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(chamado).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<ChamadoDTO> update(@PathVariable Long id, @RequestBody ChamadoDTO chamadoDTO){
+		Chamado chamado = chamadoService.update(id, chamadoDTO);
+		return ResponseEntity.ok().body(new ChamadoDTO(chamado));
+	}
+	
+	/*@DeleteMapping(value = "/{id}")
+	public ResponseEntity<ChamadoDTO> delete (@PathVariable Long id){
+		chamadoService.delete(id);
+		return ResponseEntity.noContent().build();
+	}*/
 }
