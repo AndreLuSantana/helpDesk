@@ -2,6 +2,7 @@ package com.andre.helpdesk.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,10 +47,11 @@ public class Chamado implements Serializable{
 		
 	}
 	
-	public Chamado(Long id, Prioridade prioridade, Status status, String titulo, String observacoes, Cliente cliente,
+	public Chamado(Long id, LocalDate dataAbertura, Prioridade prioridade, Status status, String titulo, String observacoes, Cliente cliente,
 			Tecnico tecnico) {
 		super();
 		this.id = id;
+		this.dataAbertura = dataAbertura;
 		this.prioridade = prioridade;
 		this.status = status;
 		this.titulo = titulo;

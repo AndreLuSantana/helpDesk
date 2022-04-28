@@ -15,6 +15,7 @@ public class ChamadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataAbertura;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechameno;
